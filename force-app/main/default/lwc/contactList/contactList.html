@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Contact List">
+        <template if:true={contacts}>
+            <table class="slds-table slds-table_bordered slds-table_col-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={contacts} for:item="contact">
+                        <tr key={contact.Id}>
+                            <td>{contact.Name}</td>
+                            <td>{contact.Email}</td>
+                            <td>{contact.Phone}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+        <template if:true={error}>
+            <div class="slds-text-color_error">{error}</div>
+        </template>
+        
+    </lightning-card>
+</template>
