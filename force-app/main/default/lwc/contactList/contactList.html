@@ -1,28 +1,20 @@
 <template>
     <lightning-card title="Contact List">
-        <template if:true={contacts}>
-            <table class="slds-table slds-table_bordered slds-table_col-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template for:each={contacts} for:item="contact">
-                        <tr key={contact.Id}>
-                            <td>{contact.Name}</td>
-                            <td>{contact.Email}</td>
-                            <td>{contact.Phone}</td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-        </template>
-        <template if:true={error}>
-            <div class="slds-text-color_error">{error}</div>
-        </template>
-        
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={contacts}
+                columns={columns}
+                show-row-number-column
+                row-number-offset={rowOffset}>
+            </lightning-datatable>
+        </div>
+
+        <div class="slds-m-around--medium">
+            <lightning-button
+                    label="Increase row offset"
+                    onclick={increaseRowOffset}>
+            </lightning-button>
+        </div>
     </lightning-card>
 </template>
