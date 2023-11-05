@@ -8,8 +8,8 @@ export default class ContactList extends LightningElement {
         { label: 'Email', fieldName: 'Email' },
         { label: 'Phone', fieldName: 'Phone' }
     ];
-    contacts;
-    rowOffset = 0;
+    @track contacts;
+    
 
     @wire(getContacts)
     wiredContacts({ error, data }) {
@@ -19,7 +19,18 @@ export default class ContactList extends LightningElement {
             console.error(error);
         }
     }
-    increaseRowOffset() {
-        this.rowOffset += 100;
+
+    handleRefresh() {
+        
+        this.refreshTable();
     }
+    refreshTable() {
+        getContacts()
+            .then(result => {
+                this.contacts = result;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+}
 }
